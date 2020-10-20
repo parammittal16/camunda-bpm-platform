@@ -50,6 +50,14 @@ public class WebApplicationUtil {
     }
   }
 
+  public static void setWebapp(String engineName, String webapp) {
+    ProcessEngineProvider processEngineProvider = getProcessEngineProvider();
+    TelemetryRegistry telemetryRegistry = getTelemetryRegistry(processEngineProvider, engineName);
+    if (telemetryRegistry != null) {
+      telemetryRegistry.addWebapp(webapp);
+    }
+  }
+
   protected static TelemetryRegistry getTelemetryRegistry(ProcessEngineProvider processEngineProvider, String engineName) {
     ProcessEngine processEngine = processEngineProvider.getProcessEngine(engineName);
     ProcessEngineConfiguration configuration = processEngine.getProcessEngineConfiguration();
